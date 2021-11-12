@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Test 2</title>
+    <link rel="stylesheet" href="\node_modules\tailwindcss\dist\tailwind.min.css">
+  </head>
+  <body>
+      <table class="bg-green-100">
+        <thead>
+          <tr>
+            <th>Código do Curso</th>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Departamento</th>
+            <th>Cidade</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id='test'></tbody>
+      </table>
+      <script>
+      fetch('http://localhost:3000')
+        .then(function(res) {
+          return res.json()
+        }).then(function(json){
+          console.log(json)
+          const tbody = document.getElementById('test')
+            json.forEach((item, i) => {
+              const tr = document.createElement('tr')
+              tbody.appendChild(tr)
+              Object.keys(item).forEach((coluna) =>{
+                const td = document.createElement('td')
+                td.innerText = item[coluna]
+                tr.appendChild(td)
+              })
+            });
+        /*})
+        .catch(function() {
+        });*/
+      }).catch(err => {
+        console.log(err);
+      });//Adicionei esse catch error aqui
+      </script>
+  </body>
+</html>
